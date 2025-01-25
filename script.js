@@ -1,96 +1,182 @@
-let historyStack = []; // Stack to keep track of the history
+// Helper function to toggle visibility of sections
+function toggleVisibility(showId) {
+    const sections = document.querySelectorAll('.container > div');
+    sections.forEach((section) => {
+        section.classList.add('hidden');
+    });
+    document.getElementById(showId).classList.remove('hidden');
+}
 
+// History stack to track navigation steps
+const navigationHistory = [];
+
+// Function to navigate to a specific section and record history
+function navigateTo(sectionId) {
+    if (navigationHistory.length === 0 || navigationHistory[navigationHistory.length - 1] !== sectionId) {
+        navigationHistory.push(sectionId);
+    }
+    toggleVisibility(sectionId);
+}
+
+// Show the Signup Section
 function showSignUp() {
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('signup-section').classList.remove('hidden');
-    historyStack.push('signup');
+    navigateTo('signup-section');
 }
 
+// Show the Login Section
 function showLogin() {
-    document.getElementById('signup-section').classList.add('hidden');
-    document.getElementById('login-section').classList.remove('hidden');
-    historyStack.push('login');
+    navigateTo('login-section');
 }
 
+// Show the Welcome Section
 function login() {
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('welcome-section').classList.remove('hidden');
-    historyStack.push('welcome');
+    // Add login logic here (validate credentials if needed)
+    navigateTo('welcome-section');
 }
 
+// Sign Up Functionality
 function signUp() {
-    alert('Sign-up successful! You can now log in.');
-    showLogin();
+    const username = document.getElementById('signup-username').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+
+    if (username && email && password) {
+        alert('Sign-Up Successful!');
+        showLogin();
+    } else {
+        alert('Please fill in all fields!');
+    }
 }
 
+// Show Classes Section
 function showClasses() {
-    document.getElementById('welcome-section').classList.add('hidden');
-    document.getElementById('class-section').classList.remove('hidden');
-    historyStack.push('class');
+    navigateTo('class-section');
 }
 
-function showYears(classType) {
-    document.getElementById('class-section').classList.add('hidden');
-    document.getElementById('year-buttons').innerHTML = `
-        <button onclick="showSemesters('${classType}', '1st Year')">1st Year</button>
-        <button onclick="showSemesters('${classType}', '2nd Year')">2nd Year</button>
-        <button onclick="showSemesters('${classType}', '3rd Year')">3rd Year</button>
-    `;
-    document.getElementById('year-section').classList.remove('hidden');
-    historyStack.push('year');
+// Show Year Section with correct semester buttons
+function showYears(selectedClass) {
+    navigateTo('year-section');
+    const yearButtons = document.getElementById('year-buttons');
+    yearButtons.innerHTML = '';
+
+    let years = [];
+
+    if (selectedClass === 'BCA') {
+        years = ['1st Year', '2nd Year', '3rd Year'];
+    } else if (selectedClass === 'BBA') {
+        years = ['1st Year', '2nd Year', '3rd Year'];
+    }
+
+    years.forEach((year) => {
+        const button = document.createElement('button');
+        button.textContent = year;
+        button.onclick = () => showSemesters(selectedClass, year);
+        yearButtons.appendChild(button);
+    });
 }
 
-function showSemesters(classType, year) {
-    document.getElementById('year-section').classList.add('hidden');
-    const semesters = {
-        '1st Year': ['1st Semester', '2nd Semester'],
-        '2nd Year': ['3rd Semester', '4th Semester'],
-        '3rd Year': ['5th Semester', '6th Semester']
-    }[year];
+// Show Semesters Section for the selected Year and Class
+function showSemesters(selectedClass, year) {
+    navigateTo('semester-section');
+    const semesterButtons = document.getElementById('semester-buttons');
+    semesterButtons.innerHTML = '';
 
-    document.getElementById('semester-buttons').innerHTML = semesters.map(sem => 
-        `<button onclick="showSubjects('${classType}', '${year}', '${sem}')">${sem}</button>`
-    ).join('');
+    let semesters = [];
 
-    document.getElementById('semester-section').classList.remove('hidden');
-    historyStack.push('semester');
+    if (year === '1st Year') {
+        semesters = ['1st Semester', '2nd Semester'];
+    } else if (year === '2nd Year') {
+        semesters = ['3rd Semester', '4th Semester'];
+    } else if (year === '3rd Year') {
+        semesters = ['5th Semester', '6th Semester'];
+    }
+
+    semesters.forEach((semester) => {
+        const button = document.createElement('button');
+        button.textContent = semester;
+        button.onclick = () => showSubjects(selectedClass, year, semester);
+        semesterButtons.appendChild(button);
+    });
 }
 
-function showSubjects(classType, year, semester) {
-    document.getElementById('semester-section').classList.add('hidden');
-    document.getElementById('subject-buttons').innerHTML = `
-        <button onclick="showContent('${classType}', '${semester}', 'Subject 1')">Subject 1</button>
-        <button onclick="showContent('${classType}', '${semester}', 'Subject 2')">Subject 2</button>
-        <button onclick="showContent('${classType}', '${semester}', 'Subject 3')">Subject 3</button>
-        <button onclick="showContent('${classType}', '${semester}', 'Subject 4')">Subject 4</button>
-        <button onclick="showContent('${classType}', '${semester}', 'Subject 5')">Subject 5</button>
-    `;
-    document.getElementById('subject-section').classList.remove('hidden');
-    historyStack.push('subject');
+// Show Subjects Section for the selected Semester
+function showSubjects(selectedClass, year, semester) {
+    navigateTo('subject-section');
+    const subjectButtons = document.getElementById('subject-buttons');
+    subjectButtons.innerHTML = '';
+
+    // Sample subjects for now, this can be updated as needed
+    const subjects = ['Subject 1', 'Subject 2', 'Subject 3', 'Subject 4', 'Subject 5'];
+    
+    subjects.forEach((subject) => {
+        const button = document.createElement('button');
+        button.textContent = subject;
+        button.onclick = () => showContent(selectedClass, year, semester, subject);
+        subjectButtons.appendChild(button);
+    });
 }
 
-function showContent(classType, semester, subject) {
-    document.getElementById('subject-section').classList.add('hidden');
-    document.getElementById('content-section').classList.remove('hidden');
-    historyStack.push('content');
+// Show Content Section for the selected Subject
+function showContent(selectedClass, year, semester, subject) {
+    navigateTo('content-section');
+    console.log(`Selected: ${selectedClass} - ${year} - ${semester} - ${subject}`);
 }
 
+// Show Books Upload Section
+function showBooks() {
+    navigateTo('books-section');
+}
+
+// Show Papers Upload Section
+function showPapers() {
+    navigateTo('papers-section');
+}
+
+// File Upload Preview for Books
+function previewBook(event) {
+    const file = event.target.files[0];
+    const previewContainer = document.getElementById('book-preview-container');
+    previewContainer.innerHTML = '';
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const iframe = document.createElement('iframe');
+            iframe.src = reader.result;
+            iframe.width = '100%';
+            iframe.height = '300px';
+            previewContainer.appendChild(iframe);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// File Upload Preview for Papers
+function previewPaper(event) {
+    const file = event.target.files[0];
+    const previewContainer = document.getElementById('preview-container');
+    previewContainer.innerHTML = '';
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const img = document.createElement('img');
+            img.src = reader.result;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Go Back Functionality
 function goBack() {
-    let lastStep = historyStack.pop();
-    if (lastStep === 'content') {
-        document.getElementById('content-section').classList.add('hidden');
-        document.getElementById('subject-section').classList.remove('hidden');
-    } else if (lastStep === 'subject') {
-        document.getElementById('subject-section').classList.add('hidden');
-        document.getElementById('semester-section').classList.remove('hidden');
-    } else if (lastStep === 'semester') {
-        document.getElementById('semester-section').classList.add('hidden');
-        document.getElementById('year-section').classList.remove('hidden');
-    } else if (lastStep === 'year') {
-        document.getElementById('year-section').classList.add('hidden');
-        document.getElementById('class-section').classList.remove('hidden');
-    } else if (lastStep === 'class') {
-        document.getElementById('class-section').classList.add('hidden');
-        document.getElementById('welcome-section').classList.remove('hidden');
+    if (navigationHistory.length > 1) {
+        navigationHistory.pop(); // Remove current section
+        const previousSection = navigationHistory[navigationHistory.length - 1];
+        toggleVisibility(previousSection); // Show the previous section
+    } else {
+        alert('No more steps to go back.');
     }
 }

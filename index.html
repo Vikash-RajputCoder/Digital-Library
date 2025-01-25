@@ -23,7 +23,7 @@
             <input type="text" id="signup-username" placeholder="Username" /><br />
             <input type="email" id="signup-email" placeholder="Email" /><br />
             <input type="password" id="signup-password" placeholder="Password" /><br />
-            <button onclick="showLogin()">Back to Login</button>
+            <button class="back-button" onclick="showLogin()">Back to Login</button>
             <button onclick="signUp()">Sign Up</button>
         </div>
 
@@ -38,28 +38,28 @@
             <h2>Select Your Class</h2>
             <button onclick="showYears('BCA')">BCA</button>
             <button onclick="showYears('BBA')">BBA</button>
-            <button onclick="goBack()">Back</button>
+            <button class="back-button" onclick="goBack()">Back</button>
         </div>
 
         <!-- Year Selection Section -->
         <div id="year-section" class="hidden">
             <h2>Select Your Year</h2>
             <div id="year-buttons"></div>
-            <button onclick="goBack()">Back</button>
+            <button class="back-button" onclick="goBack()">Back</button>
         </div>
 
         <!-- Semester Selection Section -->
         <div id="semester-section" class="hidden">
             <h2>Select Your Semester</h2>
             <div id="semester-buttons"></div>
-            <button onclick="goBack()">Back</button>
+            <button class="back-button" onclick="goBack()">Back</button>
         </div>
 
         <!-- Subjects Section -->
         <div id="subject-section" class="hidden">
             <h2>Select a Subject</h2>
             <div id="subject-buttons"></div>
-            <button onclick="goBack()">Back</button>
+            <button class="back-button" onclick="goBack()">Back</button>
         </div>
 
         <!-- Content Section -->
@@ -67,7 +67,23 @@
             <h2>Resources</h2>
             <button onclick="showBooks()">Books</button>
             <button onclick="showPapers()">Previous Year Papers</button>
-            <button onclick="goBack()">Back</button>
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+
+        <!-- Books Upload Section -->
+        <div id="books-section" class="hidden">
+            <h2>Upload Books</h2>
+            <input type="file" id="upload-book" accept="application/pdf" onchange="previewBook(event)" />
+            <div id="book-preview-container"></div>
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+
+        <!-- Papers Upload Section -->
+        <div id="papers-section" class="hidden">
+            <h2>Upload Previous Year Papers</h2>
+            <input type="file" id="upload-paper" accept="image/*" onchange="previewPaper(event)" />
+            <div id="preview-container"></div>
+            <button class="back-button" onclick="goBack()">Back</button>
         </div>
     </div>
 

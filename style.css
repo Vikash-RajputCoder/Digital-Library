@@ -47,6 +47,30 @@ button:active {
     transform: scale(1);
 }
 
+.back-button {
+    background-color: #ff4d4d;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.back-button:before {
+    content: '⮐';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+.back-button:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+}
+
 /* Hide sections initially */
 .hidden {
     display: none;
