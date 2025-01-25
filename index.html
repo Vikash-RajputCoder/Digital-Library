@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="login-section">
+            <h1>Login</h1>
+            <input type="text" id="login-username" placeholder="Username" /><br />
+            <input type="password" id="login-password" placeholder="Password" /><br />
+            <button onclick="showSignUp()">Sign Up</button>
+            <button onclick="login()">Login</button>
+        </div>
+
+        <!-- Signup Section -->
+        <div id="signup-section" class="hidden">
+            <h1>Sign Up</h1>
+            <input type="text" id="signup-username" placeholder="Username" /><br />
+            <input type="email" id="signup-email" placeholder="Email" /><br />
+            <input type="password" id="signup-password" placeholder="Password" /><br />
+            <button onclick="showLogin()">Back to Login</button>
+            <button onclick="signUp()">Sign Up</button>
+        </div>
+
+        <!-- Welcome Section -->
+        <div id="welcome-section" class="hidden">
+            <h1>Welcome to Digital Library</h1>
+            <button onclick="showClasses()">Welcome to our BCA and BBA Classes</button>
+        </div>
+
+        <!-- Class Selection Section -->
+        <div id="class-section" class="hidden">
+            <h2>Select Your Class</h2>
+            <button onclick="showYears('BCA')">BCA</button>
+            <button onclick="showYears('BBA')">BBA</button>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <!-- Year Selection Section -->
+        <div id="year-section" class="hidden">
+            <h2>Select Your Year</h2>
+            <div id="year-buttons"></div>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <!-- Semester Selection Section -->
+        <div id="semester-section" class="hidden">
+            <h2>Select Your Semester</h2>
+            <div id="semester-buttons"></div>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <!-- Subjects Section -->
+        <div id="subject-section" class="hidden">
+            <h2>Select a Subject</h2>
+            <div id="subject-buttons"></div>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <!-- Content Section -->
+        <div id="content-section" class="hidden">
+            <h2>Resources</h2>
+            <button onclick="showBooks()">Books</button>
+            <button onclick="showPapers()">Previous Year Papers</button>
+            <button onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
