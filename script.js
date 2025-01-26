@@ -105,9 +105,105 @@ function showSubjects(selectedClass, year, semester) {
     const subjectButtons = document.getElementById('subject-buttons');
     subjectButtons.innerHTML = '';
 
-    // Sample subjects for now, this can be updated as needed
-    const subjects = ['Subject 1', 'Subject 2', 'Subject 3', 'Subject 4', 'Subject 5'];
-    
+    let subjects = [];
+
+    if (selectedClass === 'BCA') {
+        if (year === '1st Year' && semester === '1st Semester') {
+            subjects = [
+                'Computer Fundamentals and MS-Office',
+                'Introduction to Programming using C',
+                'Business Communication and Soft Skill',
+                'Introduction to HTML-CSS-XML',
+                'Mathematics- I',
+            ];
+        } else if (year === '1st Year' && semester === '2nd Semester') {
+            subjects = [
+                'JAVA Programming',
+                'Data Base Management System',
+                'Data Structure using C',
+                'Principles of Management',
+                'Numerical Methods',
+            ];
+        } else if (year === '2nd Year' && semester === '3rd Semester') {
+            subjects = [
+                'Digital Electronics',
+                'Python Programming',
+                'Software Engineering',
+                'Computer Network',
+                'Statistical Method and Application',
+            ];
+        } else if (year === '2nd Year' && semester === '4th Semester') {
+            subjects = [
+                'Web Technology with PHP & MySQL',
+                'Operating System',
+                'Cloud Computing',
+                'Computer Organization and Architecture',
+                'Optimization Techniques',
+            ];
+        } else if (year === '3rd Year' && semester === '5th Semester') {
+            subjects = [
+                'Network Security',
+                'Visual Basic .NET',
+                'Computer Graphics',
+                'Artificial Intelligence',
+                'Design & Analysis of Algorithms',
+            ];
+        }
+    } else if (selectedClass === 'BBA') {
+        if (year === '1st Year' && semester === '1st Semester') {
+            subjects = [
+                'Business Organization',
+                'Business Mathematics',
+                'Business Communication I',
+                'Fundamentals of Computers & Information Technology',
+                'Fundamentals of Accounting',
+                'Business Environment',
+            ];
+        } else if (year === '1st Year' && semester === '2nd Semester') {
+            subjects = [
+                'Management Thoughts & Philosophy',
+                'Micro Economics for Business',
+                'Cost Accounting',
+                'Legal & Regulatory Framework of Business',
+                'Business Communication II',
+                'Business Statistics',
+            ];
+        } else if (year === '2nd Year' && semester === '3rd Semester') {
+            subjects = [
+                'Company Law',
+                'Marketing Management',
+                'Macro Economics for Business',
+                'Principles & Practices of Management',
+                'Organizational Behaviour',
+                'Management Accounting',
+            ];
+        } else if (year === '2nd Year' && semester === '4th Semester') {
+            subjects = [
+                'Financial Management',
+                'Project Management & Planning',
+                'Research Methodology',
+                'Human Resource Management',
+                'Taxation Laws',
+                'Production Management',
+            ];
+        } else if (year === '3rd Year' && semester === '5th Semester') {
+            subjects = [
+                'Operations Research',
+                'Sales & Distribution Management',
+                'Business Policy',
+                'Entrepreneurship & Business Management',
+            ];
+        } else if (year === '3rd Year' && semester === '6th Semester') {
+            subjects = [
+                'E-Business Management & CRM',
+                'Advertising Management',
+                'Management of Financial Institutions & Services',
+                'International Business Management',
+            ];
+        }
+    }
+
+    // Create buttons for each subject
     subjects.forEach((subject) => {
         const button = document.createElement('button');
         button.textContent = subject;
